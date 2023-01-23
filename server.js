@@ -1,13 +1,16 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const connectDB = require('./backend/config/db');
 const colors = require('colors');
-const userRoutes = require('./routes/userRoutes');
-const chatRoutes = require('./routes/chatRoutes');
-const messageRoutes = require('./routes/messageRoutes');
+const userRoutes = require('./backend/routes/userRoutes');
+const chatRoutes = require('./backend/routes/chatRoutes');
+const messageRoutes = require('./backend/routes/messageRoutes');
 const app = express();
-const { notFound, errorHandler } = require('./middleWare/errorMiddleware');
+const {
+  notFound,
+  errorHandler,
+} = require('./backend/middleWare/errorMiddleware');
 dotenv.config();
 
 connectDB();
@@ -56,8 +59,8 @@ const server = app.listen(
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
   cors: {
-    // origin: 'http://localhost:3000',
-    origin: 'https://chatter-4f5d2.web.app',
+    origin: 'http://localhost:3000',
+    // origin: 'https://chatter-4f5d2.web.app',
     // credentials: true,
   },
 });
