@@ -62,7 +62,7 @@ const io = require('socket.io')(server, {
     origin: 'http://localhost:3000',
     // origin: 'https://lucent-cascaron-b0f8ee.netlify.app/',
     // origin: 'https://chatter-4f5d2.web.app',
-    // credentials: true,
+    credentials: true,
   },
 });
 
