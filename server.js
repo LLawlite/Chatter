@@ -30,13 +30,14 @@ app.use('/api/message', messageRoutes);
 
 app.use(cors());
 
-app.use(
-  cors({
-    origin: 'https://main--tubular-longma-59b1cd.netlify.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-);
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 
 // error handling middle wares
 
