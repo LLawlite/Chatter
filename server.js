@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./backend/config/db');
 const colors = require('colors');
@@ -26,6 +27,15 @@ app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
 
 app.use('/api/message', messageRoutes);
+
+app.use(cors());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 
 // error handling middle wares
 
