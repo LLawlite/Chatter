@@ -32,7 +32,7 @@ app.use(cors());
 
 app.use(
   cors({
-    origin: 'https://main--tubular-longma-59b1cd.netlify.app',
+    origin: 'https://chatter-upg4.onrender.com',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
