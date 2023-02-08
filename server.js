@@ -30,12 +30,13 @@ app.use('/api/message', messageRoutes);
 
 app.use(cors());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+app.use(
+  cors({
+    origin: 'https://main--tubular-longma-59b1cd.netlify.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 // error handling middle wares
 
@@ -69,7 +70,7 @@ const server = app.listen(
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://main--tubular-longma-59b1cd.netlify.app',
     // origin: 'https://lucent-cascaron-b0f8ee.netlify.app/',
     // origin: 'https://chatter-4f5d2.web.app',
     credentials: true,
