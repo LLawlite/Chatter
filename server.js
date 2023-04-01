@@ -8,6 +8,7 @@ const userRoutes = require('./backend/routes/userRoutes');
 const chatRoutes = require('./backend/routes/chatRoutes');
 const messageRoutes = require('./backend/routes/messageRoutes');
 const app = express();
+const helmet = require('helmet');
 const {
   notFound,
   errorHandler,
@@ -16,6 +17,8 @@ dotenv.config();
 
 connectDB();
 
+app.use(helmet()); // secures HTTP header returned by the express app
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' })); // so that browser blocks no cors
 app.use(express.json());
 
 // app.get('/', (req, res) => {
@@ -98,7 +101,7 @@ io.on('connection', (socket) => {
     // if (!chat.users) return console.log('chat.users not defined');
 
     chat.users.forEach((user) => {
-      if (user._id == newMessageRecieved.sender._id) return;
+      if (user._id == newMessageRecieved.sender._id) return; // when send by us just return
 
       socket.in(user._id).emit('message recieved', newMessageRecieved);
     });
